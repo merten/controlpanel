@@ -1,0 +1,125 @@
+import pygame
+from pygame import Surface, Color
+from pygame.locals import *
+
+
+LIST_BGCOLOR = "white"
+LIST_ELEM_HEIGHT = 17
+LIST_ELEM_BGCOLOR = "green"
+LIST_ELEM_TEXTCOLOR = "black"
+LIST_SCROLL_WIDTH = 10
+LIST_SCROLL_COLOR = "blue"
+
+"""
+GUI element.
+Displays a list of Strings.
+"""
+class ScrollList():
+    """
+    Create a new list object.
+    @param surface The Surface to draw the List on
+    @param rect The dimensions of the List
+    """
+    def __init__(self, surface, rect):
+        self.dest = surface
+        self.position = rect
+        self.width, self.height = self.position.size
+        
+        self.elementsPerPage = self.height / LIST_ELEM_HEIGHT
+        self.elementSize = (self.width-LIST_SCROLL_WIDTH, LIST_ELEM_HEIGHT)
+        
+        self.selected = 0
+        self.surface = pygame.Surface(self.position.size)
+        
+        self.list = [ ]
+        self.update = True
+        
+        ##### TEST #####
+        for i in range(1,10):
+            self.add("test" + str(i))
+        
+    """
+    Set a new list of elements.
+    """
+    def set(self, list):
+        for element in list:
+            self.add(ListElement(caption, self.elementSize))
+            
+        self.update = True
+
+    """
+    Adds a new element.
+    """
+    def add(self, caption):
+        self.list.append(ListElement(caption, self.elementSize))
+        
+        self.update = True
+        
+    """
+    Draw the List object onto the surface
+    """
+    def draw(self):
+        if self.update:
+            self.surface.fill(pygame.Color(LIST_BGCOLOR))
+            
+            #print scrollbar
+            pygame.draw.rect(self.surface,
+                             pygame.Color(LIST_SCROLL_COLOR),
+                             pygame.Rect((self.position.width - LIST_SCROLL_WIDTH, self.__get_scroll_position()), 
+                                         (LIST_SCROLL_WIDTH, self.__get_scroll_height())))
+                                         
+            #print list
+            for i, element in enumerate(self.list[:self.elementsPerPage]):
+                self.surface.blit(element.getSurface(),
+                                  (0,i*LIST_ELEM_HEIGHT))
+            
+            self.update = False
+                         
+        #copy to destination
+        self.dest.blit(self.surface,
+                       self.position)
+                       
+    """
+    Returns the (upper) scrollbar position based on the current list position
+    """
+    def __get_scroll_position(self):
+        if self.selected == None or len(self.list) <= self.elementsPerPage:
+            return 0
+        else:
+            return ((self.height - self.__get_scroll_height()) * self.selected) / (len(self.list)  - self.elementsPerPage)
+        
+    """
+    Returns the current scrollbar height based on number of elements.
+    """
+    def __get_scroll_height(self):
+        if len(self.list) <= self.elementsPerPage:
+            return self.height
+        else:
+            return (self.elementsPerPage * self.height) / len(self.list)
+        
+
+
+class ListElement:
+    """
+    Create a new List Element
+    @param caption Text on the new element.
+    @param size Size of the new element surface. Tuple of width and height.
+    """
+    def __init__(self, caption, size):
+        self.caption = caption
+        self.surface = pygame.Surface(size)
+        
+        self.updateSurface()
+        
+    def updateSurface(self):
+        self.surface.fill(Color(LIST_ELEM_BGCOLOR))
+        
+        font = pygame.font.Font(pygame.font.get_default_font(), self.surface.get_size()[1] - 2)
+        fontSurface = font.render(self.caption,
+                                  True,
+                                  Color(LIST_ELEM_TEXTCOLOR),
+                                  Color(LIST_ELEM_BGCOLOR))
+        self.surface.blit(fontSurface, (0,0))
+    
+    def getSurface(self):
+        return self.surface
