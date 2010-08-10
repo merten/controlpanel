@@ -1,10 +1,13 @@
-## SETTINGS
-##
-HOST = 'localhost'
-PORT = '6600'
-PASSWORD = False
-###
+##################
+#
+# PyTheater Config
+#
+# 10/08/2010
+#
+##################
 
+
+## General Settings
 
 KEYMAP = {
     0:  "c-up",      #c-up
@@ -24,7 +27,15 @@ KEYMAP = {
 }
 
 
-#color definition
+## MPD Settings
+HOST = 'localhost'
+PORT = '6600'
+PASSWORD = False
+
+
+## GUI Settings
+
+#Color definition
 LIST_BGCOLOR = "white"
 LIST_ELEM_HEIGHT = 20
 LIST_ELEM_BGCOLOR = "green"

@@ -15,7 +15,7 @@
    version="1.1"
    inkscape:version="0.47 r22583"
    sodipodi:docname="L.svg"
-   inkscape:export-filename="/home/merten/Desktop/pympd/media/play.png"
+   inkscape:export-filename="/home/merten/pympd/media/l.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
   <defs
@@ -71,30 +71,16 @@
        x="0"
        y="0"
        transform="translate(0,988.36218)" />
-    <path
-       sodipodi:type="star"
-       style="fill:#d8a8ff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1"
-       id="path3596"
-       sodipodi:sides="3"
-       sodipodi:cx="19.786654"
-       sodipodi:cy="21.881044"
-       sodipodi:r1="19.233538"
-       sodipodi:r2="9.6167688"
-       sodipodi:arg1="0"
-       sodipodi:arg2="1.0471976"
-       inkscape:flatsided="false"
-       inkscape:rounded="0"
-       inkscape:randomized="0"
-       d="m 39.020191,21.881044 -14.425153,8.328367 -14.425153,8.328366 0,-16.656733 0,-16.6567318 14.425153,8.3283668 14.425153,8.328365 z"
-       transform="translate(9.4049621,998.48114)" />
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
-       x="7.0365481"
-       y="38.962978"
-       id="text2900"
-       transform="translate(0,988.36218)"><tspan
+       style="font-size:40px;font-style:normal;font-weight:normal;fill:#d8a8ff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;font-family:Bitstream Vera Sans"
+       x="17.742188"
+       y="1034.6786"
+       id="text2900"><tspan
          sodipodi:role="line"
-         id="tspan2902"></tspan></text>
+         id="tspan2902"
+         x="17.742188"
+         y="1034.6786"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;fill:#d8a8ff;fill-opacity:1;stroke:#ffffff;stroke-opacity:1;font-family:Arial Black;-inkscape-font-specification:'Arial Black, Bold'">L</tspan></text>
   </g>
 </svg>

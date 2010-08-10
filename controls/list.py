@@ -3,20 +3,16 @@ from pygame import Surface, Color
 from pygame.locals import *
 
 from settings import *
-from data.playlist import Playlist
-
-
-
 
 """
 GUI element.
-Displays a list songs.
+Displays a list that implements the selectable list.
 """
 class ScrollList():
     """
     Create a new list object.
     @param surface The Surface to draw the List on
-    @param rect The dimensions of the List
+    @param rect The position and dimensions of the List
     """
     def __init__(self, surface, rect):
         self.dest = surface
@@ -38,9 +34,7 @@ class ScrollList():
     def set(self, list):
         self.list = list
          
-        self.drawList = []
-        for element in list.getList():
-            self.drawList.append(ListElement(unicode(element), self.elementSize))
+        self.drawList = [ ListElement(unicode(element), self.elementSize) for element in list.getList() ]
 
         self.update = True
             
@@ -151,7 +145,10 @@ class ListElement:
         self.currentSurface = pygame.Surface(size)
         
         self.updateSurface()
-        
+      
+    """
+    Update all list element surfaces.
+    """
     def updateSurface(self):
         #render normal list element
         self.surface.fill(Color(LIST_ELEM_BGCOLOR))
@@ -184,11 +181,24 @@ class ListElement:
                                   Color(LIST_ELEM_BGCOLOR_CURRENT))
         self.currentSurface.blit(fontSurface, (0,0))
     
+
+    """
+    Return a surface.
+    @return The unselected Surface.
+    """
     def getSurface(self):
         return self.surface
     
+    """
+    Return a surface.
+    @return The selected Surface.
+    """
     def getSelectedSurface(self):
         return self.selectedSurface
 
+    """
+    Return a surface.
+    @return The current marked Surface.
+    """
     def getCurrentSurface(self):
         return self.currentSurface

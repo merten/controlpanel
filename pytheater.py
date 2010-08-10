@@ -15,8 +15,12 @@ class Theater():
 
         #Init Joystick
         pygame.joystick.init()
-        self.joystick = pygame.joystick.Joystick(0)
-        self.joystick.init()
+        try:
+            self.joystick = pygame.joystick.Joystick(0)
+        except pygame.error:
+            print 'No joystick found'
+        else:
+            self.joystick.init()
 
         #Init Clock
         self.clock = Clock()
