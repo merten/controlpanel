@@ -4,10 +4,22 @@
 #                             #
 ###############################
 
--Documentation
+-Dokumentation
 -Aufräumen
--Tastaturbedienung
--Starten ohne Joystick
 -Logging
 -L-R einfügen
--Design ?? was ist das? 
+-Design ?? was ist das?
+-Notification area
+
+-Tastaturbedienung #Done 25/08/2010
+-Starten ohne Joystick #Done
+
+###############################
+#                             #
+# BUGS                        #
+#                             #
+###############################
+
+pyMPD
+    - Anzeige des aktuellen Songs fehlerhalft
+        ab dem 9. Song

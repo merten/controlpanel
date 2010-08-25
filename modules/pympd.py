@@ -4,26 +4,16 @@ from pygame.locals import *
 from pygame import Color
 
 from mpd import (MPDClient, CommandError, ConnectionError, ProtocolError)
-#from socket import error as SocketError
 
 from controls.button import Button
 from controls.list import ScrollList
 from data.dataCollector import DataCollector, MpdNotConnected
 from data.playlist import Playlist
 
-from settings import *
+from settings.pympd import *
 
+from helper import keyActions
 
-
-BUTTONS = [
-    {"name":"pause", "active":"media/pause-active.png", "inactive":"media/pause.png", "position":(148,20)},
-    {"name":"play", "active":"media/play-active.png", "inactive":"media/play.png", "position":(218,20)},
-    {"name":"stop", "active":"media/stop-active.png", "inactive":"media/stop.png", "position":(288,20)},
-    {"name":"rew", "active":"media/rew-active.png", "inactive":"media/rew.png", "position":(358,20)},
-    {"name":"ff", "active":"media/ff-active.png", "inactive":"media/ff.png", "position":(428,20)},
-]
-
-LISTPOS = ((40,100),(600,340))
 
 '''
 Decorator
@@ -34,7 +24,7 @@ def mpdAccess(fun):
             fun(*args) 
     return decorator
 
-class Pympd():
+class PyMpd():
     def __init__(self, position, size):
 
         self.surface = pygame.Surface(size)
@@ -56,27 +46,26 @@ class Pympd():
         self.connected = self.__mpdClient.connected
 
         self.__updateDataCollector()
+        self.__updateButtons()
+
+        #key actions
+        self.actions = {
+            "play"  : self.__mpdClient.play,
+            "stop"  : self.__mpdClient.stop,
+            "prev"  : self.__mpdClient.previous,
+            "next"  : self.__mpdClient.next,
+            "delete": self.__mpdClient.delete
+            }
 
     @mpdAccess
     def handle_events(self, event):
         #Joypad Button down
         if event.type == USEREVENT+1:
             self.__updateDataCollector
-        elif event.type == 10 and event.button in KEYMAP:
-
-            if KEYMAP[event.button] == "A":
-                self.__mpdClient.play()    
-            elif KEYMAP[event.button] == "B":
-                self.__mpdClient.stop()
-            elif KEYMAP[event.button] == "left":
-                self.__mpdClient.previous()
-            elif KEYMAP[event.button] == "right":
-                self.__mpdClient.next()
-            elif KEYMAP[event.button] == "c-right":
-                self.__mpdClient.delete()
-            else: #let the list handle the event
-                self.list.handle_event(event)
-                return
+        elif not keyActions(event, JOYSTICK_ACTIONS, KEYBOARD_ACTIONS, self.actions):
+            #let the list handle the event
+            self.list.handle_event(event)
+            return
 
         self.__updateDataCollector()
         self.__updateButtons()

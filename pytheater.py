@@ -5,8 +5,14 @@ from pygame.locals import *
 from pygame import Color
 from pygame.time import Clock
 
-from pympd import Pympd
-from pyn64 import Pyn64
+from modules.pympd import PyMpd
+from modules.pyemu import PyEmu
+
+from settings import *
+from settings.main import *
+from keys import JOYSTICK, N64Keys 
+
+from helper import keyActions
 
 class Theater():
     def __init__(self, mode):
@@ -25,12 +31,19 @@ class Theater():
         #Init Clock
         self.clock = Clock()
 
+        #Init Applets
         self.applets = []
-        self.applets.append(Pympd((60,60),(640,480)))
-        self.applets.append(Pyn64((60,60),(640,480),'snes/'))
+        self.applets.append(PyMpd((60,60),(640,480)))
+        self.applets.append(PyEmu((60,60),(640,480),'media/roms/'))
 
         self.activeAppletNumber = 0
         self.activeApplet = self.applets[0]
+
+        #Define actions for helper function
+        self.actions = {
+            "prev" : self.prevApplet,
+            "next" : self.nextApplet
+            }
 
     def __handle_events(self):
         for event in pygame.event.get():
@@ -38,13 +51,7 @@ class Theater():
                 pygame.quit()
                 sys.exit()
             #R&L for applet change
-            elif event.type == 10 and event.button in (6,7):
-                if event.button == 6: #L
-                    self.activeAppletNumber = ((self.activeAppletNumber+1) % 
-                                                len(self.applets)) 
-                if event.button == 7: #R
-                    self.activeAppletNumber = ((self.activeAppletNumber+1) %
-                                                len(self.applets))
+            elif keyActions(event, JOYSTICK_ACTIONS, KEYBOARD_ACTIONS, self.actions):
                 self.activeApplet= self.applets[self.activeAppletNumber]
             else:
                 self.activeApplet.handle_events(event)
@@ -62,7 +69,11 @@ class Theater():
             self.__handle_events()
             self.clock.tick(12)
 
+    def prevApplet(self):
+        self.activeAppletNumber = ((self.activeAppletNumber+1) % len(self.applets))
 
+    def nextApplet(self):
+        self.activeAppletNumber = ((self.activeAppletNumber+1) % len(self.applets))
 
 
 if __name__ == '__main__':

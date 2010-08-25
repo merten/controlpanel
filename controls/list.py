@@ -1,8 +1,17 @@
+"""
+
+ List GUI element
+ modified 25.08.2010
+
+"""
 import pygame
 from pygame import Surface, Color
 from pygame.locals import *
 
-from settings import *
+from settings.list import *
+from keys import JOYSTICK
+
+from helper import keyActions
 
 """
 GUI element.
@@ -20,13 +29,21 @@ class ScrollList():
         self.width, self.height = self.position.size
         
         self.elementsPerPage = self.height / LIST_ELEM_HEIGHT
-        self.elementSize = (self.width-LIST_SCROLL_WIDTH, LIST_ELEM_HEIGHT)
+        self.elementSize = (self.width-LIST_SCROLLBAR_WIDTH, LIST_ELEM_HEIGHT)
         
         self.surface = pygame.Surface(self.position.size)
         
         self.list = None
         self.drawList = []
         self.update = True
+
+        self.begin = 0
+
+        #key Actions
+        self.actions = {
+            "down"  : self.__down,
+            "up"    : self.__up
+            }
         
     """
     Set new selectable list to print
@@ -43,10 +60,7 @@ class ScrollList():
     handle the event not handled by the gui
     """
     def handle_event(self, event):
-        if KEYMAP[event.button] == "down":
-            self.__down()
-        if KEYMAP[event.button] == "up":
-            self.__up()
+        keyActions(event,JOYSTICK_ACTIONS, KEYBOARD_ACTIONS, self.actions)    
                     
     """
     Draw the List object onto the surface
@@ -55,34 +69,35 @@ class ScrollList():
         if self.update:
             self.surface.fill(pygame.Color(LIST_BGCOLOR))
             
-            #print scrollbar
-            pygame.draw.rect(self.surface,
-                             pygame.Color(LIST_SCROLL_COLOR),
-                             pygame.Rect((self.position.width - LIST_SCROLL_WIDTH,
-                                         self.__get_scroll_position()), 
-                                         (LIST_SCROLL_WIDTH, self.__get_scroll_height())))
-                                         
+                                                     
             #print list \w selected element
             #set begin
-            if (self.list.selected >  ( len(self.list) - self.elementsPerPage) and
-                    len(self.list) > self.elementsPerPage):
-                begin = len(self.list) - self.elementsPerPage
-            elif len(self.list) <= self.elementsPerPage:
-                begin = 0
-            else:
-                begin = self.list.selected
+            if len(self.list) <= self.elementsPerPage:
+                self.begin = 0
+            elif self.list.selected > self.begin + self.elementsPerPage -1:
+                self.begin = self.list.selected - self.elementsPerPage +1
+            elif self.list.selected < self.begin:
+                self.begin = self.list.selected
             
             #print list elements
-            for i, element in enumerate(self.drawList[begin:(begin + self.elementsPerPage)]):
-                if i + begin == self.list.selected:
+            for i, element in enumerate(self.drawList[self.begin:(self.begin + self.elementsPerPage)]):
+                if i + self.begin == self.list.selected:
                     drawElement = element.getSelectedSurface()
-                elif i+begin == self.list.playing:
+                elif i + self.begin == self.list.playing:
                     drawElement = element.getCurrentSurface()
                 else:
                     drawElement = element.getSurface()           
 
                 self.surface.blit(drawElement,
                                   (0,i*LIST_ELEM_HEIGHT))
+
+            #print scrollbar
+            pygame.draw.rect(self.surface,
+                             pygame.Color(LIST_SCROLLBAR_COLOR),
+                             pygame.Rect((self.position.width - LIST_SCROLLBAR_WIDTH,
+                                         self.__get_scroll_position()), 
+                                         (LIST_SCROLLBAR_WIDTH, self.__get_scroll_height())))
+
             
             self.update = False
                          
@@ -110,15 +125,11 @@ class ScrollList():
     Returns the (upper) scrollbar position based on the current list position
     """
     def __get_scroll_position(self):
-        if self.list.selected == None or len(self.list) <= self.elementsPerPage:
+        if self.begin == 0:
             return 0
         else:
-            #correct end 
-            if self.list.selected > (len(self.list) - self.elementsPerPage):
-                selected = (len(self.list) - self.elementsPerPage)
-            else:
-                selected = self.list.selected
-            return (((self.height - self.__get_scroll_height()) * selected) /
+            #correct end
+            return (((self.height - self.__get_scroll_height()) * self.begin) /
                 (len(self.list)  - self.elementsPerPage))
         
     """
