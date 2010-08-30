@@ -39,7 +39,9 @@ JOYSTICK_ACTIONS = {
     N64Keys.B : "stop",
     N64Keys.LEFT    : "prev",
     N64Keys.RIGHT   : "next",
-    N64Keys.C_RIGHT : "delete"
+    N64Keys.C_RIGHT : "delete",
+    N64Keys.C_UP    : "volume_up",
+    N64Keys.C_DOWN  : "volume_down"
 }
 
 KEYBOARD_ACTIONS = {

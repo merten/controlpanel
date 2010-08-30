@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="play-working.svg"
+   sodipodi:docname="working.svg"
    inkscape:export-filename="/home/merten/pympd/media/play.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
@@ -268,6 +268,26 @@
        y1="1025.6139"
        x2="33.219051"
        y2="1037.5583" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3595"
+       id="linearGradient2932"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0304282,0,0,1.0704015,-11.47472,-82.002889)"
+       x1="33.219055"
+       y1="1025.6139"
+       x2="33.219051"
+       y2="1037.5583" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3595"
+       id="linearGradient3724"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.0304282,0,0,1.0704015,-11.47472,-82.002889)"
+       x1="33.219055"
+       y1="1025.6139"
+       x2="33.219051"
+       y2="1037.5583" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -277,8 +297,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="81.467949"
-     inkscape:cy="271.32373"
+     inkscape:cx="75.280765"
+     inkscape:cy="350.55399"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -841,5 +861,95 @@
        inkscape:export-filename="/home/merten/pympd/media/rew-active.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <g
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/merten/pympd/media/l.png"
+       transform="translate(0,-142)"
+       id="g2918">
+      <g
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/merten/pympd/media/stop.png"
+         id="g2920"
+         transform="matrix(1.4176622,0,0,1.425118,-0.30432602,-628.80404)">
+        <g
+           id="g2922"
+           transform="translate(0,0.1624618)">
+          <rect
+             style="fill:#27ff2a;fill-opacity:1;stroke:#000000;stroke-width:0.98319083;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0.60000002;stroke-opacity:1;stroke-dasharray:none"
+             id="rect2924"
+             width="44.46693"
+             height="43.975597"
+             x="0.60368466"
+             y="988.84052"
+             ry="2.9083629" />
+          <path
+             style="opacity:0.34599155;fill:url(#linearGradient2932);fill-opacity:1;stroke:none"
+             d="m 0.58884601,1017.3314 c 0,0 5.84947299,-4.8842 11.41042399,-4.8842 5.56095,0 14.270207,3.0316 20.366235,3.0316 5.045429,0 12.555907,-5.0525 12.555907,-5.0525 l 0,22.8907 -44.33256599,0 0,-15.9856 z"
+             id="path2926"
+             sodipodi:nodetypes="czscccc" />
+        </g>
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#d8a8ff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Arial;-inkscape-font-specification:Arial Bold"
+       x="17.79899"
+       y="686.31311"
+       id="text2934"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/merten/pympd/media/l.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan2936"
+         x="17.79899"
+         y="686.31311">L</tspan></text>
+    <g
+       id="g3710"
+       transform="translate(66,-142)"
+       inkscape:export-filename="/home/merten/pympd/media/r.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <g
+         transform="matrix(1.4176622,0,0,1.425118,-0.30432602,-628.80404)"
+         id="g3712"
+         inkscape:export-filename="/home/merten/pympd/media/stop.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <g
+           transform="translate(0,0.1624618)"
+           id="g3714">
+          <rect
+             ry="2.9083629"
+             y="988.84052"
+             x="0.60368466"
+             height="43.975597"
+             width="44.46693"
+             id="rect3716"
+             style="fill:#27ff2a;fill-opacity:1;stroke:#000000;stroke-width:0.98319083;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:0.60000002;stroke-opacity:1;stroke-dasharray:none" />
+          <path
+             sodipodi:nodetypes="czscccc"
+             id="path3718"
+             d="m 0.58884601,1017.3314 c 0,0 5.84947299,-4.8842 11.41042399,-4.8842 5.56095,0 14.270207,3.0316 20.366235,3.0316 5.045429,0 12.555907,-5.0525 12.555907,-5.0525 l 0,22.8907 -44.33256599,0 0,-15.9856 z"
+             style="opacity:0.34599155;fill:url(#linearGradient3724);fill-opacity:1;stroke:none" />
+        </g>
+      </g>
+    </g>
+    <text
+       sodipodi:linespacing="125%"
+       id="text3720"
+       y="686.31311"
+       x="79.798988"
+       style="font-size:48px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;fill:#d8a8ff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Arial;-inkscape-font-specification:Arial Bold"
+       xml:space="preserve"
+       inkscape:export-filename="/home/merten/pympd/media/r.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         y="686.31311"
+         x="79.798988"
+         id="tspan3722"
+         sodipodi:role="line">R</tspan></text>
   </g>
 </svg>

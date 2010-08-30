@@ -39,6 +39,10 @@ class Theater():
         self.activeAppletNumber = 0
         self.activeApplet = self.applets[0]
 
+        #R&L Button
+        self.__leftImage = pygame.image.load("media/l.png")
+        self.__rightImage = pygame.image.load("media/r.png")
+
         #Define actions for helper function
         self.actions = {
             "prev" : self.prevApplet,
@@ -58,8 +62,13 @@ class Theater():
 
     def __draw(self):
         self.screen.fill(Color('black'))
-
+        
         self.activeApplet.draw(self.screen)
+
+        halfHeight = self.screen.get_size()[1]/2 - 32
+
+        #self.screen.blit(self.__leftImage, (10, halfHeight))
+        #self.screen.blit(self.__rightImage,(self.screen.get_size()[0]-74, halfHeight))
 
         pygame.display.flip()
 
