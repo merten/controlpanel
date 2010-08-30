@@ -48,6 +48,8 @@ class PyMpd():
         self.__updateDataCollector()
         self.__updateButtons()
 
+        self.__mpdClient.unmute()
+
         #key actions
         self.actions = {
             "play"  : self.__mpdClient.play,
@@ -58,6 +60,9 @@ class PyMpd():
             "volume_up"   : self.__mpdClient.volume_up,
             "volume_down" : self.__mpdClient.volume_down
             }
+
+    def get_mpdClient(self):
+        return self.__mpdClient
 
     @mpdAccess
     def handle_events(self, event):

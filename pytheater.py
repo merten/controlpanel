@@ -19,6 +19,8 @@ class Theater():
         pygame.init()
         self.screen = pygame.display.set_mode(mode,pygame.FULLSCREEN)
 
+        pygame.mouse.set_visible(False)
+
         #Init Joystick
         pygame.joystick.init()
         try:
@@ -35,6 +37,7 @@ class Theater():
         self.applets = []
         self.applets.append(PyMpd((60,60),(640,480)))
         self.applets.append(PyEmu((60,60),(640,480),'media/roms/'))
+        self.applets[1].set_mpdClient(self.applets[0].get_mpdClient())
 
         self.activeAppletNumber = 0
         self.activeApplet = self.applets[0]

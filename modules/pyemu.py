@@ -33,11 +33,15 @@ class PyEmu():
         self.logo = pygame.image.load(LOGO)
         self.logo_position = ((size[0]/2) - (self.logo.get_width()/2), 0)
 
+        self.__mpdClient = None
 
         #key actions
         self.actions = {
             "start_game" : self.__startGame
             }
+
+    def set_mpdClient(self, controller):
+        self.__mpdClient = controller
 
         
     def handle_events(self, event):
@@ -50,6 +54,10 @@ class PyEmu():
     def __startGame(self):
         game = self.dirList.getList()[self.dirList.selected]
         print 'Starting Game: ', self.dir+game
+
+        if self.__mpdClient:
+            self.__mpdClient.mute()
+
         pygame.quit()
         os.execlp('zsnes','-m',self.dir+game)
         sys.exit(0)
