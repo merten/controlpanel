@@ -12,6 +12,8 @@ from keys import N64Keys
 
 LISTPOS = ((40,100),(600,340))
 
+ENDINGS = (".zip",".smc",".rar",".rom")
+
 LOGO = "media/nintendo_snes_small.png"
 
 JOYSTICK_ACTIONS = {
