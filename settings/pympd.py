@@ -43,5 +43,7 @@ JOYSTICK_ACTIONS = {
 }
 
 KEYBOARD_ACTIONS = {
-    K_RETURN : "play"
+    K_RETURN : "play",
+    K_PLUS   : "volume_up",
+    K_MINUS  : "volume_down",
 }

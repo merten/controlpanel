@@ -128,8 +128,16 @@ class DataCollector():
         self.__client.next()
 
     @remoteAccess('Error during control access.')
-    def setVol(self, vol=50):
-        self.__client.setvol(vol)
+    def volume_up(self):
+        volume = int(self.status.volume) + 10
+        if volume > 100: volume = 100
+        self.__client.setvol(volume)
+
+    @remoteAccess('Error during control access.')
+    def volume_down(self):
+        volume = int(self.status.volume) - 10
+        if volume < 0 : volume = 0
+        self.__client.setvol(volume)
 
     @remoteAccess('Error removing item from playlist.')
     def delete(self, pos=-1):

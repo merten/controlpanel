@@ -54,7 +54,9 @@ class PyMpd():
             "stop"  : self.__mpdClient.stop,
             "prev"  : self.__mpdClient.previous,
             "next"  : self.__mpdClient.next,
-            "delete": self.__mpdClient.delete
+            "delete": self.__mpdClient.delete,
+            "volume_up"   : self.__mpdClient.volume_up,
+            "volume_down" : self.__mpdClient.volume_down
             }
 
     @mpdAccess
