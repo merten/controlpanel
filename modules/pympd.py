@@ -48,7 +48,8 @@ class PyMpd():
         self.__updateDataCollector()
         self.__updateButtons()
 
-        self.__mpdClient.unmute()
+        if self.connected:
+            self.__mpdClient.unmute()
 
         #key actions
         self.actions = {

@@ -150,7 +150,7 @@ class DataCollector():
     @remoteAccess('Error during control access.')
     def unmute(self):
         if self.status.state == "play":
-            self.__client.setvol(50)
+            self.__client.setvol(100)
 
     @remoteAccess('Error removing item from playlist.')
     def delete(self, pos=-1):

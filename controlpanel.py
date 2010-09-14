@@ -70,9 +70,6 @@ class Theater():
 
         halfHeight = self.screen.get_size()[1]/2 - 32
 
-        #self.screen.blit(self.__leftImage, (10, halfHeight))
-        #self.screen.blit(self.__rightImage,(self.screen.get_size()[0]-74, halfHeight))
-
         pygame.display.flip()
 
     def run(self):

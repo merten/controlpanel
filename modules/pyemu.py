@@ -55,7 +55,7 @@ class PyEmu():
         game = self.dirList.getList()[self.dirList.selected]
         print 'Starting Game: ', self.dir+game
 
-        if self.__mpdClient:
+        if self.__mpdClient and self.__mpdClient.connected:
             self.__mpdClient.mute()
 
         pygame.quit()
