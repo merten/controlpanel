@@ -50,7 +50,7 @@ class ScrollList():
     """
     def set(self, list):
         self.list = list
-         
+
         self.drawList = [ ListElement(unicode(element), self.elementSize) for element in list.getList() ]
 
         self.update = True

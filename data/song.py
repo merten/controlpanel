@@ -28,7 +28,7 @@ class Song():
         except AttributeError:
             artist = ''
             
-        return ('%s - %s' % (artist, title))
+        return ('%s - %s' % (unicode(artist, 'utf-8'), unicode(title, 'utf-8')))
         
     def __str__(self):
         return unicode()

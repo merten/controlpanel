@@ -17,7 +17,7 @@ from helper import keyActions
 class Theater():
     def __init__(self, mode):
         pygame.init()
-        self.screen = pygame.display.set_mode(mode,pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode(mode,pygame.RESIZABLE)
 
         pygame.mouse.set_visible(False)
 
