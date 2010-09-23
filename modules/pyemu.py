@@ -1,18 +1,14 @@
-#! /usr/bin/python
+"""
+This is the applet to launch and list games from the ROM-directory.
+"""
 import pygame, sys, os
-from pygame.locals import *
 from pygame import Color
 
 from controls.button import Button
 from controls.list import ScrollList
-
 from data.dirlist import DirList
-
-from settings import *
 from settings.pyemu import *
-
 from keys import JOYSTICK
-
 from helper import keyActions
 
 
@@ -45,7 +41,6 @@ class PyEmu():
 
         
     def handle_events(self, event):
-        #Joypad Button down
         if not keyActions(event, JOYSTICK_ACTIONS, KEYBOARD_ACTIONS, self.actions):
             #let the list handle the event
             self.list.handle_event(event)
@@ -59,7 +54,7 @@ class PyEmu():
             self.__mpdClient.mute()
 
         pygame.quit()
-        os.execlp('zsnes','-m',self.dir+game)
+        os.execlp(EMULATOR,EMULATOR_ARGS, self.dir+game)
         sys.exit(0)
 
     def draw(self, surface):

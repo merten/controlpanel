@@ -1,6 +1,7 @@
-#! /usr/bin/python
+"""
+This is the applet to control the MPD daemon via the  controlpanel interface.
+"""
 import pygame, sys, os
-from pygame.locals import *
 from pygame import Color
 
 from mpd import (MPDClient, CommandError, ConnectionError, ProtocolError)
@@ -11,18 +12,18 @@ from data.dataCollector import DataCollector, MpdNotConnected
 from data.playlist import Playlist
 
 from settings.pympd import *
-
 from helper import keyActions
 
 
-'''
-Decorator
-'''
 def mpdAccess(fun):
-    def decorator(*args):
+    """
+    Decorator that allows functions to access the remote server only if a
+    connection exists.
+    """
+    def mpdDecorator(*args):
         if args[0].connected:
             fun(*args) 
-    return decorator
+    return mpdDecorator
 
 class PyMpd():
     def __init__(self, position, size):
@@ -30,21 +31,22 @@ class PyMpd():
         self.surface = pygame.Surface(size)
         self.position = position
 
-        #set timer for playlist refresh
+        #Set timer for playlist refresh.
         pygame.time.set_timer(USEREVENT+1, 5000)
                 
-        """Buttons"""
+        # Init Buttons
         self.buttons = {}
         for button in BUTTONS:
             self.buttons[button["name"]] = Button(button["inactive"], button["active"] , button["position"])
             
-        """List"""
+        # Init the playlist view.
         self.list = ScrollList(self.surface, pygame.Rect(LISTPOS))
         self.list.set(Playlist([]))
 
         self.__mpdClient = DataCollector(HOST, PORT)
         self.connected = self.__mpdClient.connected
 
+        # Retrieve current status.
         self.__updateDataCollector()
         self.__updateButtons()
 
@@ -63,6 +65,10 @@ class PyMpd():
             }
 
     def get_mpdClient(self):
+        """
+        Returns:
+            The data collector interface for controll with other classes.
+        """
         return self.__mpdClient
 
     @mpdAccess
@@ -83,6 +89,9 @@ class PyMpd():
     '''
     @mpdAccess
     def __updateDataCollector(self):
+        """
+        Updates the status and the playlist of the MPD server.
+        """
         self.__mpdClient.updateStatus()
         self.__mpdClient.updatePlaylist()
         self.__updatePlaylist()
@@ -94,11 +103,11 @@ class PyMpd():
     def __updatePlaylist(self):
         self.list.set(self.__mpdClient.getPlaylist())
 
-    '''
-    Updates all buttons according to their state in the MPD daemon.
-    '''
     @mpdAccess
     def __updateButtons(self):
+        """
+        Updates all buttons according to their state in the MPD daemon.
+        """
         self.__mpdClient.updateStatus()
         for button in self.buttons.values():
             button.active = False
@@ -122,5 +131,3 @@ class PyMpd():
         self.list.draw()
 
         surface.blit(self.surface, self.position)
-            
-        

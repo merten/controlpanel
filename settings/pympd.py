@@ -1,25 +1,19 @@
-#########################
-#                       #
-# PyMpd Module Settings #
-# 25/08/2010            #
-#                       #
-#########################
+"""
+PyMpd Module Settings
+25/08/2010
+"""
 
 from pygame.locals import *
-
-from settings import *
 from keys import N64Keys
 
-## MPD Settings
+# MPD Settings
 HOST = 'localhost'
 PORT = '6600'
 PASSWORD = False
 
+# GUI Settings
 LISTPOS = ((40,100),(600,340))
 
-'''
-Display Settings
-'''
 BUTTONS = [
     {"name":"pause", "active":"media/pause-active.png",
      "inactive":"media/pause.png", "position":(148,20)},
@@ -33,7 +27,7 @@ BUTTONS = [
      "inactive":"media/ff.png", "position":(428,20)},
 ]
 
-
+# Key Definitions
 JOYSTICK_ACTIONS = {
     N64Keys.A : "play",
     N64Keys.B : "stop",

@@ -1,43 +1,38 @@
-'''
-Directory list for N64-Emulator
-'''
+"""
+Directory list for N64-Emulator.
+Selectable list for the list GUI element.
+"""
 
 from os import listdir
 import re
 
 from settings.pyemu import *
+from list import List
 
 
 def romFilter(filename):
+    """
+    Returns:
+        True if filename is a SNES rom image.
+    """
     for end in ENDINGS:
         if re.search(end,filename):
             return True
     return False
     
 
-class DirList():
+class DirList(List):
     def __init__(self, dir):
+        """
+        Create a new list from directory. The files a filtered for SNES Images.
+        """
         self.playing = None
         self.selected = 0
 
         try:
-            self.__list = listdir(dir)
+            self.list = listdir(dir)
         except OSError:
-            self.__list = []
+            self.list = []
 
-        #filter list
-        self.__list = filter(romFilter,self.__list)
-
-    def getList(self):
-        return self.__list
-
-    def setSelected(self, select):
-         if(select > len(self.__list)-1):
-            self.selected = len(self.__list)-1
-         elif(select < 0):
-            self.selected = 0
-         else:
-            self.selected = select        
-
-    def __len__(self):
-        return len(self.__list)
+        #Filter list.
+        self.list = filter(romFilter,self.list)

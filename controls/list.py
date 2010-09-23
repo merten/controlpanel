@@ -1,29 +1,27 @@
 """
-
- List GUI element
- modified 25.08.2010
-
+GUI element for displaying selectable lists.
 """
 import pygame
 from pygame import Surface, Color
 from pygame.locals import *
 
+from settings.main import *
 from settings.list import *
 from keys import JOYSTICK
 
 from helper import keyActions
 
-"""
-GUI element.
-Displays a list that implements the selectable list.
-"""
 class ScrollList():
     """
-    Create a new list object.
-    @param surface The Surface to draw the List on
-    @param rect The position and dimensions of the List
+    Displays a list that implements the selectable list.
     """
     def __init__(self, surface, rect):
+        """
+        Args:
+            surface: The Surface to draw the List on.
+            rect: The position and dimensions of the List on the
+                    target surface.
+        """
         self.dest = surface
         self.position = rect
         self.width, self.height = self.position.size
@@ -45,27 +43,26 @@ class ScrollList():
             "up"    : self.__up
             }
         
-    """
-    Set new selectable list to print
-    """
     def set(self, list):
+        """
+        Set new selectable list to print.
+        """
         self.list = list
 
         self.drawList = [ ListElement(unicode(element), self.elementSize) for element in list.getList() ]
 
         self.update = True
             
-        
-    """
-    handle the event not handled by the gui
-    """
     def handle_event(self, event):
-        keyActions(event,JOYSTICK_ACTIONS, KEYBOARD_ACTIONS, self.actions)    
-                    
-    """
-    Draw the List object onto the surface
-    """
+        """
+        Handle the event not handled by the GUI.
+        """
+        keyActions(event,JOYSTICK_ACTIONS, KEYBOARD_ACTIONS, self.actions) 
+    
     def draw(self):
+        """
+        Draw the List object onto the surface.
+        """
         if self.update:
             self.surface.fill(pygame.Color(LIST_BGCOLOR))
             
@@ -104,38 +101,39 @@ class ScrollList():
         #copy to destination
         self.dest.blit(self.surface,
                        self.position)
-                       
-    """
-    Moves the selection up
-    """
+
     def __up(self):
+        """
+        Moves the selection up.
+        """
         if len(self.list) != 0:
             self.list.selected = (self.list.selected-1) % len(self.list)
             self.update = True
-        
-    """
-    Moves the selection down
-    """
+
     def __down(self):
+        """
+        Moves the selection down.
+        """
         if len(self.list) != 0:
             self.list.selected = (self.list.selected+1) % len(self.list)
             self.update = True
-                       
-    """
-    Returns the (upper) scrollbar position based on the current list position
-    """
+
     def __get_scroll_position(self):
+        """
+        Returns: 
+            The (upper) scrollbar position based on the current list position.
+        """
         if self.begin == 0:
             return 0
         else:
             #correct end
             return (((self.height - self.__get_scroll_height()) * self.begin) /
                 (len(self.list)  - self.elementsPerPage))
-        
-    """
-    Returns the current scrollbar height based on number of elements.
-    """
+
     def __get_scroll_height(self):
+        """
+        Returns the current scrollbar height based on number of elements.
+        """
         if len(self.list) <= self.elementsPerPage:
             return self.height
         else:
@@ -144,23 +142,23 @@ class ScrollList():
 
 
 class ListElement:
-    """
-    Create a new List Element
-    @param caption Text on the new element.
-    @param size Size of the new element surface. Tuple of width and height.
-    """
     def __init__(self, caption, size):
+        """
+        Args:
+            caption: Text on the new element.
+            size: Size of the new element surface. Tuple of width and height.
+        """
         self.caption = caption
         self.surface = pygame.Surface(size)
         self.selectedSurface = pygame.Surface(size)
         self.currentSurface = pygame.Surface(size)
         
         self.updateSurface()
-      
-    """
-    Update all list element surfaces.
-    """
+
     def updateSurface(self):
+        """
+        Update all list element surfaces.
+        """
         #render normal list element
         self.surface.fill(Color(LIST_ELEM_BGCOLOR))
         
@@ -191,25 +189,24 @@ class ListElement:
                                   Color(LIST_ELEM_TEXTCOLOR),
                                   Color(LIST_ELEM_BGCOLOR_CURRENT))
         self.currentSurface.blit(fontSurface, (0,0))
-    
 
-    """
-    Return a surface.
-    @return The unselected Surface.
-    """
     def getSurface(self):
+        """
+        Returns:
+            The unselected Surface.
+        """
         return self.surface
-    
-    """
-    Return a surface.
-    @return The selected Surface.
-    """
+
     def getSelectedSurface(self):
+        """
+        Returns:
+            The selected Surface.
+        """
         return self.selectedSurface
 
-    """
-    Return a surface.
-    @return The current marked Surface.
-    """
     def getCurrentSurface(self):
+        """
+        Returns:
+            The current marked Surface.
+        """
         return self.currentSurface

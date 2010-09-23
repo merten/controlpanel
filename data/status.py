@@ -1,10 +1,8 @@
-'''
+"""
  Status abstract for MPD-Status
-'''
+"""
 
-class Status():
-    
-    
+class Status():    
     def __init__(self):
         self.connected = False
         

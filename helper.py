@@ -1,19 +1,15 @@
-########################
-#                      #
-# Helper functions     #
-#                      #
-########################
-
+"""
+Helper functions for general use.
+"""
 from pygame.locals import *
-
 from keys import JOYSTICK
 
-'''
-Runs an action if current event is in keytable.
-@param actions table of actions and keywords.
-@return False if no action was found otherwise True
-'''
 def keyActions(event, joystick_actions, keyboard_actions, actions):
+    """
+    Runs an action if current event is in keytable.
+    @param actions table of actions and keywords.
+    @return False if no action was found otherwise True
+    """
     if event.type == JOYSTICK and event.button in joystick_actions:
         if joystick_actions[event.button] in actions:
             actions[joystick_actions[event.button]]()

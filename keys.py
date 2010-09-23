@@ -1,19 +1,15 @@
-########################
-#                      #
-# key definitions      #
-# 25/08/2010           #
-#                      #
-########################
+"""
+Key definitions for the N64 controller. Used by the setting files.
+"""
 
-'''
-Define a joystick event type for better readability.
-'''
+""" Define a joystick event type for better readability.  """
 JOYSTICK = 10
 
-'''
-Key definitions for a standart N64 controller.
-'''
+
 class N64Keys():
+    """
+    Key definitions for a standart N64 controller.
+    """
     C_UP = 0 
     C_RIGHT = 1
     C_DOWN = 2

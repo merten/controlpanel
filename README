@@ -1,10 +1,15 @@
-
-Description
+Controlpanel
 -------------------
+
+This program is a gui for mpd and zsnes. The main purpose is to provide an
+intface controllable with a joystick. This makes it possible to easily build a
+music control/gaming station with one control device.
 
 
 Installation
 -------------------
+
+comming soon
 
 
 Dependences
@@ -17,3 +22,10 @@ Python librarys
 
 External programs
 - znes
+
+
+Licence
+-------------------
+
+The programm is released under the GNU General Public Licence.
+See COPYING for more information.

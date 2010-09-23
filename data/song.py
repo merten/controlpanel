@@ -1,6 +1,6 @@
-'''
+"""
  Song abstract for MPD-Songs
-'''
+"""
 
 class Song():
     

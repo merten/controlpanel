@@ -1,15 +1,13 @@
-#########################
-#                       #
-# List Settings         #
-# 25/08/2010            #
-#                       #
-#########################
+"""
+List Settings
+25/08/2010
+"""
 
 from pygame.locals import *
-
-from settings import *
 from keys import N64Keys
 
+
+# Key Definitions
 JOYSTICK_ACTIONS = {
     N64Keys.UP   : "up",
     N64Keys.DOWN : "down"
