@@ -1,6 +1,8 @@
 #! /bin/bash
 
-cd /home/merten/controlpanel
+CURRENTDIR=`dirname $0`
+
+cd $CURRENTDIR
 
 #while [ 1 ]
 #do

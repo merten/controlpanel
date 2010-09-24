@@ -12,7 +12,8 @@
     -Uhrzeit
     -Lautsträrke
 -Hilfe
-    
+-Distribution
+    http://docs.python.org/distutils/index.html#distutils-index    
 
 
 -Lautstärkeregelung #Done 30/08/2010

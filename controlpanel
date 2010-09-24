@@ -17,11 +17,13 @@
 
 # Do NOT "set -e"
 
+# Import controlpanel config file
+. /etc/controlpanel.conf
+
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Description of the service"
 NAME=controlpanel
-DAEMON=/home/merten/controlpanel/$NAME.sh
 DAEMON_ARGS="--options args"
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME

@@ -1,0 +1,8 @@
+##
+#
+#   Controlpanel example config file
+#
+##
+
+# Daemon location for init script
+DAEMON=/path/to/controlpanel/controlpanel.sh
