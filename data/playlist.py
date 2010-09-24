@@ -26,6 +26,16 @@ class Playlist(List):
         Unset the currently playing marker in the list.
         """
         self.playing = None
+        
+    def getSelected(self):
+        """
+        Returns:
+            Selected song, None if an error occoured.
+        """
+        try:
+            return self.list[self.selected]
+        except IndexError:
+            return None
     
     def updatePlaylist(self, list):
         """

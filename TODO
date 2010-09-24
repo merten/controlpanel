@@ -29,7 +29,10 @@
 ###############################
 
 pyMPD
-    - Attach songid from playlist to client list
+    - Attach songid from playlist to client list #fixed 24/09/2010
+
+
+
         {'album': 'Robot Wars', 'artist': 'Bin\xc3\xa4rpilot', 'track': '4', 'title': 'Project Wildfire', 'pos': '6', 'genre': 'Electronic', 'file': 'Binarpilot - Robot Wars -- Jamendo - OGG Vorbis q7 - 2007.08.01 [www.jamendo.com]/04 - Project Wildfire.ogg', 'time': '316', 'date': '2007-08-01 19:15:59', 'id': '6'}
         {'album': 'Robot Wars', 'artist': 'Bin\xc3\xa4rpilot', 'track': '5', 'title': 'On The Run', 'pos': '7', 'genre': 'Electronic', 'file': 'Binarpilot - Robot Wars -- Jamendo - OGG Vorbis q7 - 2007.08.01 [www.jamendo.com]/05 - On The Run.ogg', 'time': '270', 'date': '2007-08-01 19:15:59', 'id': '7'}
         {'album': 'Robot Wars', 'artist': 'Bin\xc3\xa4rpilot', 'track': '6', 'title': 'A New Galaxy', 'pos': '8', 'genre': 'Electronic', 'file': 'Binarpilot - Robot Wars -- Jamendo - OGG Vorbis q7 - 2007.08.01 [www.jamendo.com]/06 - A New Galaxy.ogg', 'time': '281', 'date': '2007-08-01 19:15:59', 'id': '8'}

@@ -105,17 +105,21 @@ class DataCollector():
             selected = self.__playlist.selected
         else:
             selected = 0
+        
         self.__playlist = Playlist(self.__client.playlistinfo())
         self.__playlist.setSelected(selected)
         self.__setPlaying()
-
 
     def __setPlaying(self):
         """
             Sets the currently playing song in the playlist.
         """
         if self.status.state in ('play','pause'):
-            self.__playlist.setPlaying(self.status.songid)
+            #Correct possible incorrect songid
+            for i,song in enumerate(self.__playlist.list):
+                if int(song.id) == self.status.songid:
+                    self.__playlist.setPlaying(i)
+                    break
         else:
             self.__playlist.unsetPlaying()
             
@@ -137,9 +141,17 @@ class DataCollector():
         Args:
             songid: Song ID in the current playlist.
         """
-        if pos == -1:
-            pos = self.__playlist.selected
-        self.__client.play(pos)
+        if songid == -1:
+            songid = self.__playlist.selected
+        
+        #Get songid from playlist because they can differ
+        try:
+            songid = int(self.__playlist.getSelected().pos)
+            print songid
+        except IndexError:
+            pass
+        else:
+            self.__client.play(songid)
 
     @remoteAccess('Error during control access.')
     def pause(self):
