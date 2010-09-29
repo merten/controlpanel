@@ -13,7 +13,8 @@
     -Lautsträrke
 -Hilfe
 -Distribution
-    http://docs.python.org/distutils/index.html#distutils-index    
+    http://docs.python.org/distutils/index.html#distutils-index
+-Performance verbessern
 
 
 -Lautstärkeregelung #Done 30/08/2010

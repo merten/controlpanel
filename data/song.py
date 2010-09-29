@@ -23,6 +23,10 @@ class Song():
         except AttributeError:
             title = ''
             
+        #Title attribute can be a list
+        if isinstance(title, list):
+            title = title[0]
+            
         try:
             artist = self.artist
         except AttributeError:
