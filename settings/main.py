@@ -19,6 +19,8 @@ LIST_ELEM_TEXTCOLOR = "black"
 LIST_SCROLLBAR_WIDTH = 13
 LIST_SCROLLBAR_COLOR = "blue"
 
+NOTIFY_FONT_COLOR = "white"
+
 # Key Definitions
 JOYSTICK_ACTIONS = {
     N64Keys.L : "prev",

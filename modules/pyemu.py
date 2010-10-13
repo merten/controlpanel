@@ -1,3 +1,4 @@
+# -*- coding: utf-8
 """
 This is the applet to launch and list games from the ROM-directory.
 """
@@ -13,8 +14,12 @@ from helper import keyActions
 
 
 class PyEmu():
-    def __init__(self, position, size, dir):
+    def __init__(self, panel, position, size, dir):
 
+        self.panel = panel
+        
+        self.__notify = "Wähle ein Spiel."
+        
         self.surface = pygame.Surface(size)
         self.position = position
 
@@ -58,6 +63,8 @@ class PyEmu():
         sys.exit(0)
 
     def draw(self, surface):
+        self.panel.notify(self.__notify)
+        
         self.surface.fill(Color("black"))
             
         self.list.draw()

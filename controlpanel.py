@@ -25,6 +25,7 @@ from pygame.time import Clock
 
 from modules.pympd import PyMpd
 from modules.pyemu import PyEmu
+from modules.pynotify import NotificationArea
 
 from settings.main import *
 from keys import JOYSTICK, N64Keys 
@@ -49,11 +50,14 @@ class Panel():
 
         #Init Clock
         self.clock = Clock()
+        
+        #Activate notification area
+        self.notificationArea = NotificationArea(self, (60,540), (640,20))
 
         #Init Applets
         self.applets = []
-        self.applets.append(PyMpd((60,60),(640,480)))
-        self.applets.append(PyEmu((60,60),(640,480),'media/roms/'))
+        self.applets.append(PyMpd(self, (60,60),(640,480)))
+        self.applets.append(PyEmu(self, (60,60),(640,480),'media/roms/'))
         self.applets[1].set_mpdClient(self.applets[0].get_mpdClient())
 
         self.activeAppletNumber = 0
@@ -82,6 +86,7 @@ class Panel():
     def __draw(self):
         self.screen.fill(Color('black'))
         self.activeApplet.draw(self.screen)
+        self.notificationArea.draw(self.screen)
         pygame.display.flip()
 
     def run(self):
@@ -89,6 +94,12 @@ class Panel():
             self.__draw()
             self.__handle_events()
             self.clock.tick(12)
+    
+    def notify(self, caption):
+        """
+        Prints a new caption to the notification area.
+        """
+        self.notificationArea.setCaption(caption)
 
     def prevApplet(self):
         """ Rotates through the applets forward. The next applet is displayed. """

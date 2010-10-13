@@ -1,3 +1,4 @@
+# -*- coding: utf-8
 """
 This is the applet to control the MPD daemon via the  controlpanel interface.
 """
@@ -26,8 +27,9 @@ def mpdAccess(fun):
     return mpdDecorator
 
 class PyMpd():
-    def __init__(self, position, size):
-
+    def __init__(self, panel, position, size):
+        self.panel = panel
+    
         self.surface = pygame.Surface(size)
         self.position = position
 
@@ -52,6 +54,8 @@ class PyMpd():
 
         if self.connected:
             self.__mpdClient.unmute()
+            
+        self.__notify = ""
 
         #key actions
         self.actions = {
@@ -95,7 +99,13 @@ class PyMpd():
         self.__mpdClient.updateStatus()
         self.__mpdClient.updatePlaylist()
         self.__updatePlaylist()
-           
+        
+        #Update notification area
+        if self.__mpdClient.status.state in ("play", "pause"):
+            self.__notify = u"Lautstärke: %s %%" % self.__mpdClient.status.volume
+        else:
+            self.__notify = ""
+             
     '''
     Set local playlist to server playlist.
     '''
@@ -123,6 +133,8 @@ class PyMpd():
 
                 
     def draw(self, surface):
+        self.panel.notify(self.__notify)
+        
         self.surface.fill(Color("black"))
         
         for button in self.buttons.values():
