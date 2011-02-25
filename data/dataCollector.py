@@ -232,10 +232,10 @@ class DataCollector():
         Args:
             songid: The song id in the current playlist to be deleted.
         """
-        if pos == -1:
-            pos = self.__playlist.selected
+        if songid == -1:
+            songid = self.__playlist.selected
         try:
-            self.__client.delete(pos)
+            self.__client.delete(songid)
         except CommandError:
             pass
 

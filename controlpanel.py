@@ -19,7 +19,7 @@
     
 """
 
-import pygame, sys, os
+import pygame, sys
 from pygame import Color
 from pygame.time import Clock
 
@@ -28,7 +28,6 @@ from modules.pyemu import PyEmu
 from modules.pynotify import NotificationArea
 
 from settings.main import *
-from keys import JOYSTICK, N64Keys 
 
 from helper import keyActions
 

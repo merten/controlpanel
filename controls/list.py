@@ -7,7 +7,7 @@ from pygame.locals import *
 
 from settings.main import *
 from settings.list import *
-from keys import JOYSTICK
+#from keys import JOYSTICK
 
 from helper import keyActions
 

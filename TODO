@@ -4,6 +4,7 @@
 #                             #
 ###############################
 
+-Init-Skript
 -Dokumentation
 -Aufräumen
 -Logging
@@ -15,6 +16,7 @@
 -Distribution
     http://docs.python.org/distutils/index.html#distutils-index
 -Performance verbessern
+    -threading
 
 
 -Lautstärkeregelung #Done 30/08/2010

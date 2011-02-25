@@ -1,8 +1,9 @@
 """
 Helper functions for general use.
 """
-from pygame.locals import *
+
 from keys import JOYSTICK
+from pygame.locals import *
 
 def keyActions(event, joystick_actions, keyboard_actions, actions):
     """
