@@ -41,8 +41,8 @@ class PyEmu():
             "start_game" : self.__startGame
             }
 
-    def set_mpdClient(self, controller):
-        self.__mpdClient = controller
+    def set_mpd_commander(self, commander):
+        self.__mpd_commander = commander
 
         
     def handle_events(self, event):
@@ -55,8 +55,8 @@ class PyEmu():
         game = self.dirList.getList()[self.dirList.selected]
         print 'Starting Game: ', self.dir+game
 
-        if self.__mpdClient and self.__mpdClient.connected:
-            self.__mpdClient.mute()
+        if self.__mpd_commander:
+            self.__mpd_commander.mute()
 
         pygame.quit()
         os.execlp(EMULATOR,EMULATOR_ARGS, self.dir+game)

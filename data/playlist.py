@@ -11,7 +11,7 @@ class Playlist(List):
         self.selected = 0
         self.playing = None
 
-        self.updatePlaylist(list)
+        self.update(list)
         
     def setPlaying(self, pos):
         """
@@ -37,7 +37,7 @@ class Playlist(List):
         except IndexError:
             return None
     
-    def updatePlaylist(self, list):
+    def update(self, list):
         """
         Update the list from a songlist returned by the MPD-server.
         Args:
@@ -47,5 +47,3 @@ class Playlist(List):
 
         for songinfo in list:
             self.list.append(Song(songinfo))
-
-        self.setSelected(self.selected)
