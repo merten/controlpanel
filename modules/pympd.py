@@ -4,6 +4,7 @@ This is the applet to control the MPD daemon via the  controlpanel interface.
 """
 import pygame, sys, os
 from pygame import Color
+import logging
 
 from mpd import (MPDClient, CommandError, ConnectionError, ProtocolError)
 
@@ -19,6 +20,7 @@ from helper import keyActions
 
 class PyMpd():
     def __init__(self, panel, position, size):
+        self.logger = logging.getLogger('controlpanel.pympd')
         self.panel = panel
     
         self.surface = pygame.Surface(size)
@@ -63,11 +65,12 @@ class PyMpd():
             }
 
     def exit(self):
-        print "send exit command"
+        self.logger.debug('send exit command to MPD-client thread.')
         self.commander.exit()
-        print 'waiting for thread'
+        self.logger.debug('waiting for MPD-client thread.')
         while self.__commanderThread.is_alive():
             pass
+        self.logger.debug('MPD-client thread terminated.')
 
         del self.__commanderThread
         del self.commander

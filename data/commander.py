@@ -203,8 +203,8 @@ class Communicator(object):
         try:
             self.__client.delete(songid)
         except CommandError:
-            #TODO Error handling and Logging
-            print "delete CommandError"
+            #TODO Error handling
+            self.logger.exception("delete: CommandError")
 
 class CommanderThread(Thread):
     """
@@ -247,7 +247,7 @@ class CommanderThread(Thread):
                 continue
             
             cmd_method, cmd_args = cmd
-            print cmd
+            self.logger.debug('Current command: %s' % str(cmd))
             
             try:
                 try:

@@ -81,7 +81,6 @@ class Panel():
             if event.type == QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
                 pygame.event.clear()
                 self.applets[0].exit()
-                print "return from exit"
                 self.running = False
                 break
             elif keyActions(event, JOYSTICK_ACTIONS, KEYBOARD_ACTIONS, self.actions):
@@ -102,7 +101,7 @@ class Panel():
             self.__handle_events()
             self.clock.tick(12)
 
-        print "done"
+        self.logger.debug('Terminating')
         pygame.quit()
         sys.exit()
     
