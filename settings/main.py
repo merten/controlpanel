@@ -3,11 +3,14 @@ Main Module Settings
 updated 16/09/2010
 """
 
+import logging
+
 from pygame.locals import *
 from keys import N64Keys
 
 # General Settings
-
+LOGGING_PATH = 'log/controlpanel.log'
+LOGGING_LEVEL = logging.DEBUG
 
 # GUI Settings
 LIST_BGCOLOR = "white"

@@ -19,6 +19,7 @@
     
 """
 
+import logging
 import pygame, sys
 from pygame import Color
 from pygame.time import Clock
@@ -33,6 +34,9 @@ from helper import keyActions
 
 class Panel():
     def __init__(self, mode):
+        self.logger = logging.getLogger('controlpanel') 
+        
+        self.logger.debug('Init pygame')
         pygame.init()
         self.screen = pygame.display.set_mode(mode,pygame.RESIZABLE)
 
@@ -43,7 +47,7 @@ class Panel():
         try:
             self.joystick = pygame.joystick.Joystick(0)
         except pygame.error:
-            print 'No joystick found'
+            self.logger.info('No joystick found')
         else:
             self.joystick.init()
 
@@ -110,5 +114,11 @@ class Panel():
 
 
 if __name__ == '__main__':
+    logging.basicConfig(filename=LOGGING_PATH,
+                        filemode='w',
+                        level=LOGGING_LEVEL,
+                        format='%(asctime)s -[%(name)s-%(levelname)s]- %(message)s',
+                        datefmt='%d.%m.%Y %H:%M')
+    logging.getLogger().addHandler(logging.StreamHandler()) #Write to Console too
     instance = Panel(mode=(800,600))
     instance.run()

@@ -5,6 +5,7 @@ The communication is done via the event class.
 
 from threading import (Thread, Event)
 from Queue import (Empty, Queue)
+import logging
 from mpd import (MPDClient, CommandError, ConnectionError, ProtocolError)
 import socket
 
@@ -83,12 +84,15 @@ class Communicator(object):
             hostname: Hostname of MPD-server.
             port: Port of MPD-Server
         """
+        self.logger = logging.getLogger('controlpanel.pympd')
+        
         #MPD Client setup
         self.__client = MPDClient()
         try:
             self.__connect(hostname,port)
         except socket.error:
             self.connected = False
+            self.logger.error('Connection to MPD-server failed.')
         else:
             self.connected = True
             
@@ -201,6 +205,8 @@ class CommanderThread(Thread):
     Does the communication and updates the status.
     """
     def __init__(self,commander, data, hostname='localhost',port=6600):
+        self.logger = logging.getLogger('controlpanel.pympd')
+        
         Thread.__init__(self)
         
         self.__hostname = hostname
@@ -226,6 +232,7 @@ class CommanderThread(Thread):
                 'delete' : self.__delete}
         
     def run(self):
+        self.logger.debug('Running MPD-client thread')
         while True:
             self.__commander.event.wait()
             cmd = self.__commander.pop()
@@ -239,10 +246,12 @@ class CommanderThread(Thread):
                 try:
                     if cmd_method in self.__cmd_index:
                         self.__cmd_index[cmd_method](*cmd_args)
-                except MpdError:
-                    #TODO Logging
-                    pass
+                except AttributeError:
+                    self.logger.exception('Thread got unknown command: %s' % cmd_method)
+                except MpdError, e:
+                    self.logger.exception('MPD-client error: %s' % e)
             except MpdNotConnected:
+                self.logger.debug('MPD-client not connected ... reconnecting')
                 self.__reconnect()
             
             if cmd_method == 'exit':
@@ -307,8 +316,7 @@ class CommanderThread(Thread):
         try:
             songid = int(self.__data.playlist.getSelected().pos)
         except IndexError:
-            #TODO Error handling
-            pass
+            self.logger.exception("play: unable to obtain song id")
         else:
             self.__communicator.play(songid)
 
@@ -376,8 +384,7 @@ class CommanderThread(Thread):
             try:
                 self.__communicator.set_volume(self.__data.status.last_volume)
             except AttributeError:
-                #TODO Logging
-                pass
+                self.logger.debug('unmute: no known last volume')
             else:
                 self.__communicator.set_volume(50)
 
