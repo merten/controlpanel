@@ -6,10 +6,11 @@ This is a copy of the information on the MPD Server.
 from threading import Lock
 
 import status
+import playlist
 
 class Data(object):
     def __init__(self):
-        self.playlist = None
+        self.playlist = playlist.Playlist([])
         self.status = status.Status()
         
         self.__lock = Lock()

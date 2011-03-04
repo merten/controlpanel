@@ -16,6 +16,12 @@ class Commander(object):
         self.event = Event()
         
         self.__queue = Queue()
+
+    def __getattr__(self, name):
+        def put_command(*args):
+            self.put(name, *args)
+
+        return put_command
         
     def put(self, command, *args):
         """
@@ -198,7 +204,7 @@ class Communicator(object):
             self.__client.delete(songid)
         except CommandError:
             #TODO Error handling and Logging
-            pass
+            print "delete CommandError"
 
 class CommanderThread(Thread):
     """
@@ -241,6 +247,7 @@ class CommanderThread(Thread):
                 continue
             
             cmd_method, cmd_args = cmd
+            print cmd
             
             try:
                 try:
@@ -255,6 +262,8 @@ class CommanderThread(Thread):
                 self.__reconnect()
             
             if cmd_method == 'exit':
+                while self.__commander.pop():
+                    pass
                 del self.__communicator #shut down connection
                 break #shut down thread
             
@@ -269,13 +278,7 @@ class CommanderThread(Thread):
         """
         Updates the playlist from server.
         """
-        if self.__data.playlist:
-            selected = self.__data.playlist.selected
-        else:
-            selected = 0
-        
-        self.__data.playlist = Playlist(self.__communicator.get_playlist())
-        self.__data.playlist.setSelected(selected)
+        self.__data.playlist.update(self.__communicator.get_playlist())
         self.__set_playing()
         
     def __update_status(self):
@@ -289,15 +292,17 @@ class CommanderThread(Thread):
         """
             Sets the currently playing song in the playlist.
         """
-        if self.__data.status.state in ('play','pause'):
-            #Correct possible incorrect songid
-            for i,song in enumerate(self.__data.playlist.list):
-                if int(song.id) == self.status.songid:
-                    self.__playlist.setPlaying(i)
-                    break
-        else:
-            self.__data.playlist.unsetPlaying()
-        
+        try:
+            if self.__data.status.state in ('play','pause'):
+                #Correct possible incorrect songid
+                for i,song in enumerate(self.__data.playlist.list):
+                    if int(song.id) == self.__data.status.songid:
+                        self.__data.playlist.setPlaying(i)
+                        break
+            else:
+                self.__data.playlist.unsetPlaying()
+        except AttributeError:
+            self.__data.playlist.unsetPlaying() 
         
     ###MPD CONTROL###
     def __play(self, songid=-1):

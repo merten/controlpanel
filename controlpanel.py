@@ -61,7 +61,7 @@ class Panel():
         self.applets = []
         self.applets.append(PyMpd(self, (60,60),(640,480)))
         self.applets.append(PyEmu(self, (60,60),(640,480),'media/roms/'))
-        self.applets[1].set_mpdClient(self.applets[0].get_mpdClient())
+        #self.applets[1].set_mpd_commander(self.applets[0].commander)
 
         self.activeAppletNumber = 0
         self.activeApplet = self.applets[0]
@@ -79,8 +79,11 @@ class Panel():
         """            
         for event in pygame.event.get():
             if event.type == QUIT or event.type == KEYDOWN and event.key == K_ESCAPE:
-                pygame.quit()
-                sys.exit()
+                pygame.event.clear()
+                self.applets[0].exit()
+                print "return from exit"
+                self.running = False
+                break
             elif keyActions(event, JOYSTICK_ACTIONS, KEYBOARD_ACTIONS, self.actions):
                 self.activeApplet= self.applets[self.activeAppletNumber]
             else:
@@ -93,10 +96,15 @@ class Panel():
         pygame.display.flip()
 
     def run(self):
-        while 1:
+        self.running = True
+        while self.running:
             self.__draw()
             self.__handle_events()
             self.clock.tick(12)
+
+        print "done"
+        pygame.quit()
+        sys.exit()
     
     def notify(self, caption):
         """
