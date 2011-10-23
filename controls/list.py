@@ -47,6 +47,9 @@ class ScrollList():
         """
         Set new selectable list to print.
         """
+        if self.list.getList() == list.getList():
+            return
+
         self.list = list
 
         self.drawList = [ ListElement(unicode(element), self.elementSize) for element in list.getList() ]
@@ -153,7 +156,7 @@ class ListElement:
         self.selectedSurface = pygame.Surface(size)
         self.currentSurface = pygame.Surface(size)
         
-        self.updateSurface()
+        self.surface = None;
 
     def updateSurface(self):
         """
@@ -195,6 +198,8 @@ class ListElement:
         Returns:
             The unselected Surface.
         """
+        if self.surface == None:
+            self.updateSurface()
         return self.surface
 
     def getSelectedSurface(self):

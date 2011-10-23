@@ -135,7 +135,7 @@ class PyMpd():
     def draw(self, surface):
         self.panel.notify(self.__notify)
         
-        self.surface.fill(Color("black"))
+        #self.surface.fill(Color("black"))
         
         for button in self.buttons.values():
             button.draw(self.surface)
